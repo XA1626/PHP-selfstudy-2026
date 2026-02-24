@@ -1,0 +1,48 @@
+***  PHP syntax  ***
+
+PHP syntax = the rules that define how PHP code must be written.
+
+Examples:
+<?php
+// 1. Statements end with semicolon ;
+echo "Hello";
+
+// 2. Variables start with $
+$name = "John";
+
+// 3. Case sensitivity
+$var = 5;  // different from $Var
+
+// 4. Keywords not case sensitive
+ECHO "hi"; // works but not recommended
+
+// 5. Comments
+// Single line
+# Single line
+/* Multi line */
+?>
+
+Think of it as: PHP grammar - the correct way to write PHP code so the computer understands it.
+
+***  PHP tags  ***
+
+PHP tags = the markers that tell the server "this is PHP code, process it":
+
+Example:
+<?php // Opening tag - start PHP
+
+// PHP code goes here
+
+?> // Closing tag - end PHP (optional)
+
+Types:
+1. Standard tag: <?php ... ?>
+2. Short tag: <? ... ?> (not recommended, may not be supported)
+3. ASP tag: <% ... %> (deprecated)
+4. Script tag: <script language="php"> ... </script> (not commonly used)
+
+Key rules:
+Opening tag <?php is mandatory
+Closing tag ?> is optional
+If file is only PHP, omit closing tag
+Everything outside tags is treated as HTML
