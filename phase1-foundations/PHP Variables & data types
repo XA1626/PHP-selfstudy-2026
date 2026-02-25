@@ -1,0 +1,261 @@
+<?php
+// ============================================
+// PHP VARIABLES - containers for storing data
+// ============================================
+
+/*
+Variables in PHP = named containers that hold data
+Think of them as labeled boxes where you can store values
+*/
+
+// 1. VARIABLE DECLARATION - ALL variables start with $
+$firstName = "John";        // String
+$age = 25;                  // Integer
+$height = 5.9;              // Float
+$isStudent = true;          // Boolean
+$hobbies = array();         // Array
+
+// 2. VARIABLE NAMING RULES
+$validName = "OK";          // Starts with letter
+$_validName = "OK";         // Starts with underscore
+$validName123 = "OK";       // Can contain numbers
+// $123invalid = "Wrong";    // ERROR: Can't start with number
+// $invalid-name = "Wrong";  // ERROR: No hyphens allowed
+// $invalid name = "Wrong";  // ERROR: No spaces allowed
+
+// 3. VARIABLE NAMING CONVENTIONS
+$userFirstName = "John";    // camelCase (common for variables)
+$user_last_name = "Doe";    // snake_case (also common)
+// ClassName = "Test";       // PascalCase (for classes)
+
+// 4. VARIABLE ASSIGNMENT
+$x = 5;                     // Simple assignment
+$y = $x;                    // Copy value
+$z = &$x;                   // Reference assignment (both point to same value)
+
+// 5. VARIABLE SCOPE
+$globalVar = "I'm global";   // Global scope
+
+function testScope() {
+    $localVar = "I'm local"; // Local scope
+    global $globalVar;       // Access global variable
+    echo $globalVar;
+}
+
+// 6. VARIABLE VARIABLES (advanced)
+$varName = "message";
+$$varName = "Hello";        // Creates $message = "Hello"
+echo $message;              // Outputs: Hello
+
+// 7. CONSTANTS (not really variables, but related)
+define("SITE_NAME", "MyWebsite");  // Define constant
+const VERSION = "1.0";              // Another way
+// Constants don't use $ and can't be changed
+
+// ============================================
+// PHP DATA TYPES - different kinds of data
+// ============================================
+
+/*
+Data types = what kind of information the variable holds
+Think of them as different types of containers for different contents
+*/
+
+// 1. STRING - Text data
+$string1 = "Hello World";           // Double quotes
+$string2 = 'Hello World';           // Single quotes
+$string3 = "Price: $50";            // Can contain variables: "Price: $50"
+$string4 = 'Price: $50';            // Single quotes treat $ as normal character
+
+// String concatenation
+$fullName = "John" . " " . "Doe";   // Using dot (.) operator
+
+// String functions
+echo strlen("Hello");                // String length: 5
+echo str_word_count("Hello World");  // Word count: 2
+echo strrev("Hello");                // Reverse: olleH
+
+// 2. INTEGER - Whole numbers
+$age = 30;                           // Decimal
+$binary = 0b1010;                    // Binary (10 in decimal)
+$octal = 077;                        // Octal (63 in decimal)
+$hex = 0xFF;                         // Hexadecimal (255 in decimal)
+
+// Integer limits
+$maxInt = PHP_INT_MAX;                // Maximum integer size
+$minInt = PHP_INT_MIN;                // Minimum integer size
+
+// 3. FLOAT (DOUBLE) - Decimal numbers
+$price = 19.99;                      // Regular float
+$scientific = 1.2e3;                 // Scientific notation (1200)
+$negativeFloat = -3.14;               // Negative float
+
+// Float precision issues
+$result = 0.1 + 0.2;                  // Might be 0.30000000000000004
+
+// 4. BOOLEAN - True or False
+$isLoggedIn = true;                   // True value
+$isAdmin = false;                      // False value
+
+// Values that evaluate to FALSE:
+$false1 = false;                       // Boolean false
+$false2 = 0;                           // Integer zero
+$false3 = 0.0;                          // Float zero
+$false4 = "";                           // Empty string
+$false5 = "0";                          // String "0"
+$false6 = array();                      // Empty array
+$false7 = NULL;                         // NULL
+
+// 5. NULL - No value
+$noValue = NULL;                       // Variable with no value
+$undefined;                            // Also NULL if not set
+unset($noValue);                       // Delete variable (sets to NULL)
+
+// 6. ARRAY - Collection of values
+// Indexed array
+$colors = array("Red", "Green", "Blue");
+$fruits = ["Apple", "Banana", "Orange"]; // Short syntax
+
+// Associative array (key => value)
+$person = [
+    "name" => "John",
+    "age" => 30,
+    "city" => "New York"
+];
+
+// Multidimensional array
+$matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+
+// Accessing array elements
+echo $colors[0];                       // First element: Red
+echo $person["name"];                  // John
+echo $matrix[1][2];                    // 6
+
+// Array functions
+count($colors);                         // Array length: 3
+array_push($colors, "Yellow");          // Add element
+sort($colors);                          // Sort array
+
+// 7. OBJECT - Instance of a class
+class Car {
+    public $brand;
+    public $color;
+    
+    function __construct($brand, $color) {
+        $this->brand = $brand;
+        $this->color = $color;
+    }
+    
+    function getInfo() {
+        return $this->color . " " . $this->brand;
+    }
+}
+
+$myCar = new Car("Toyota", "Red");      // Create object
+echo $myCar->getInfo();                  // Call object method
+
+// 8. RESOURCE - External resource
+$file = fopen("test.txt", "r");          // File resource
+$connection = mysqli_connect();          // Database resource
+
+// 9. CALLABLE - Callback functions
+function myCallback($item) {
+    return $item * 2;
+}
+$numbers = [1, 2, 3];
+$result = array_map('myCallback', $numbers); // Using callable
+
+// ============================================
+// TYPE CHECKING AND CONVERSION
+// ============================================
+
+// TYPE CHECKING FUNCTIONS
+$test = "Hello";
+
+echo is_string($test);        // Check if string: true/false
+echo is_int($test);            // Check if integer
+echo is_float($test);          // Check if float
+echo is_bool($test);           // Check if boolean
+echo is_array($test);          // Check if array
+echo is_object($test);         // Check if object
+echo is_null($test);           // Check if NULL
+echo is_numeric($test);        // Check if numeric string
+
+// Get variable type
+echo gettype($test);            // Returns: "string", "integer", etc.
+
+// TYPE JUGGLING (Automatic conversion)
+$number = "10" + 5;             // String converts to int: 15
+$text = "Score: " . 10;         // Int converts to string: "Score: 10"
+$sum = "10 apples" + 5;         // Warning: "10 apples" becomes 10
+
+// TYPE CASTING (Manual conversion)
+$strNum = "123";
+$intNum = (int)$strNum;          // Cast to integer
+$floatNum = (float)$strNum;       // Cast to float
+$boolVal = (bool)$strNum;         // Cast to boolean
+$arrayVal = (array)$strNum;       // Cast to array
+
+// Alternative casting functions
+$intNum = intval($strNum);        // Convert to integer
+$floatNum = floatval($strNum);     // Convert to float
+$strVal = strval(123);            // Convert to string
+$boolVal = boolval($strNum);       // Convert to boolean
+
+// ============================================
+// VARIABLE INFORMATION & DEBUGGING
+// ============================================
+
+$debugVar = "Hello World";
+
+// Check if variable exists
+isset($debugVar);                   // true
+isset($undefinedVar);                // false
+
+// Check if variable is empty
+empty($debugVar);                    // false (has value)
+empty($emptyVar);                     // true (undefined)
+empty("");                            // true
+empty(0);                             // true
+
+// Print variable information
+var_dump($debugVar);                  // string(11) "Hello World"
+print_r($debugVar);                    // Hello World
+
+// Unset (delete) variable
+unset($debugVar);                      // Remove variable
+
+// Variable tracking
+$defined = defined("SITE_NAME");      // Check if constant exists
+
+// ============================================
+// KEY RULES SUMMARY
+// ============================================
+
+/*
+1. All variables start with $ symbol
+2. Variable names are case-sensitive ($name ≠ $Name)
+3. Variables can contain letters, numbers, underscores
+4. Cannot start with a number
+5. No spaces or hyphens allowed
+6. PHP is loosely typed - no need to declare type
+7. Variables can change type during script
+8. Always initialize variables before use
+9. Use descriptive variable names
+10. Constants use define() or const, no $ symbol
+*/
+
+// Good practice examples:
+$userAge = 25;                  // Clear, descriptive
+$item_count = 10;                // Underscore format
+$firstName = "John";             // camelCase format
+
+// Avoid:
+$x = 25;                         // Not descriptive
+$data = "something";              // Too vague
+$user1_name2_address = "NYC";     // Too long and messy
+?>
